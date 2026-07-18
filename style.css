@@ -32,10 +32,6 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: var(--font-sans);
     background-color: var(--color-bg);
@@ -81,6 +77,13 @@ body {
     pointer-events: none;
     z-index: -1;
     transition: background 0.3s;
+}
+
+/* Hide cursor glow on mobile as it's not needed */
+@media (max-width: 768px) {
+    .cursor-glow {
+        display: none;
+    }
 }
 
 #three-bg {
@@ -159,6 +162,13 @@ header nav {
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+/* Hide nav links on mobile to prevent overflow */
+@media (max-width: 768px) {
+    header nav {
+        display: none;
+    }
+}
+
 .nav-link:hover::after {
     transform: scaleX(1);
     transform-origin: left;
@@ -200,6 +210,8 @@ header nav {
 .section-header {
     text-align: center;
     margin-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .section-title {
@@ -347,6 +359,30 @@ section {
     stroke-width: 1.5;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
+}
+
+@media (max-width: 768px) {
+    .ecosystem-diagram {
+        grid-template-areas:
+            "internet"
+            "cloudflare"
+            "dreamcloud"
+            "web"
+            "telegram"
+            "auth"
+            "queue"
+            "ytdlp"
+            "torrent"
+            "downloads"
+            "extraction"
+            "organizer"
+            "truenas"
+            "gdrive"
+            "media-server"
+            "streaming";
+        gap: 1rem;
+        justify-items: center; /* Center all nodes in the single column */
+    }
 }
 
 /* DreamCloud Dashboard */
@@ -547,6 +583,22 @@ section {
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes rotate-reverse { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 
+@media (max-width: 768px) {
+    .tech-galaxy {
+        max-width: 320px;
+        height: 320px;
+    }
+    .sun { width: 60px; height: 60px; }
+    .planet { width: 40px; height: 40px; top: -20px; }
+    .orbit:nth-of-type(1) { --orbit-radius: 150px; }
+    .orbit:nth-of-type(2) { --orbit-radius: 110px; }
+    .orbit:nth-of-type(3) { --orbit-radius: 70px; }
+    .tech-details { bottom: -50px; }
+    .stack-section {
+        overflow: hidden; /* Prevents overflow from blocking scroll on mobile */
+    }
+}
+
 /* Timeline Section */
 .timeline-container {
     position: relative;
@@ -585,6 +637,20 @@ section {
 .timeline-item:nth-child(even)::after { left: -8px; }
 .timeline-content h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
 .timeline-content p { color: var(--color-text-muted); }
+
+@media (max-width: 768px) {
+    .timeline-line { left: 1rem; }
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        padding-left: 3rem;
+        text-align: left;
+    }
+    .timeline-item::after,
+    .timeline-item:nth-child(odd)::after,
+    .timeline-item:nth-child(even)::after { left: calc(1rem - 8px); }
+}
 
 /* Contact Terminal */
 .contact-grid {
@@ -640,4 +706,35 @@ body > svg {
     width: 0%;
     border-radius: 9999px;
     box-shadow: 0 0 8px var(--color-accent-primary);
+}
+
+/* =================================================================
+   12. MOBILE NAVIGATION
+   ================================================================= */
+.mobile-nav {
+    position: fixed;
+    bottom: 2rem;
+    right: 1.5rem;
+    z-index: 1000;
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mobile-nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-glass);
+    backdrop-filter: blur(10px);
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav {
+        display: flex;
+    }
 }
