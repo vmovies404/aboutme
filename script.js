@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================================================================
     // 0. LENOIS SMOOTH SCROLL
     // =================================================================
-    const lenis = new Lenis();
+    const lenis = new Lenis({
+        lerp: 0.07, // Lower values create a smoother scroll effect
+    });
     function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
@@ -183,7 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('three-bg').appendChild(renderer.domElement);
 
-    const starCount = 5000;
+    // Optimize star count for mobile
+    const starCount = window.innerWidth < 768 ? 1500 : 5000;
     const positions = new Float32Array(starCount * 3);
     for (let i = 0; i < starCount; i++) {
         positions[i * 3] = (Math.random() - 0.5) * 2000;
@@ -398,4 +401,21 @@ document.addEventListener('DOMContentLoaded', () => {
             addLogEntry();
         }
     }
+
+    // =================================================================
+    // 12. MOBILE NAVIGATION
+    // =================================================================
+    const mobileNavTop = document.getElementById('mobile-nav-top');
+    const mobileNavBottom = document.getElementById('mobile-nav-bottom');
+
+    if (mobileNavTop && mobileNavBottom) {
+        mobileNavTop.addEventListener('click', () => {
+            lenis.scrollTo('top', { duration: 2 });
+        });
+
+        mobileNavBottom.addEventListener('click', () => {
+            lenis.scrollTo('bottom', { duration: 2 });
+        });
+    }
+
 });
