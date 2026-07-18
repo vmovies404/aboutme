@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0. PRELOADER / BOOT SEQUENCE
     // =================================================================
     const preloaderText = document.querySelector('.preloader-text');
-    const bootSequence = ["BOOTING VigneshOS...", "Loading Profile...", "Identity Verified: VIGNESH", "Initializing Cloud Services...", "Loading Experience Modules...", "Connection Established."];
+    const bootSequence = ["BOOTING DreamOS...", "Loading Profile...", "Identity Verified: VIGNESH", "Initializing Cloud Services...", "Loading Experience Modules...", "Connection Established.", "Welcome To DreamOS"];
     let bootIndex = 0;
     const interval = setInterval(() => {
         if (preloaderText) preloaderText.textContent = bootSequence[bootIndex];
