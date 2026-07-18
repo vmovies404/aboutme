@@ -1,206 +1,322 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="no-js">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vignesh | Angular Dev • TrueNAS • Photography</title>
-  <link rel="icon" href="data:," />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
-  <style>
-    :root {
-      --bg: linear-gradient(135deg, #0c0c1a 0%, #1a0d2e 50%, #0f0f23 100%);
-      --glass: rgba(20, 20, 50, 0.4);
-      --border: rgba(99, 102, 241, 0.3);
-      --text: #e2e8f0; --text-sec: #94a3b8;
-      --accent: linear-gradient(135deg, #8b5cf6, #6366f1, #4f46e5);
-      --glow: rgba(139, 92, 246, 0.4);
-    }
-    [data-theme="light"] {
-      --bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
-      --glass: rgba(255, 255, 255, 0.7); --border: rgba(99, 102, 241, 0.2);
-      --text: #1e293b; --text-sec: #475569; --glow: rgba(79, 70, 229, 0.3);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Inter', sans-serif; background: var(--bg); 
-      color: var(--text); min-height: 100vh; overflow-x: hidden;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    header { 
-      position: fixed; top: 0; width: 100%; padding: 1.5rem 5%; 
-      display: flex; justify-content: space-between; align-items: center;
-      backdrop-filter: blur(20px); background: rgba(12,12,26,0.5);
-      z-index: 1000; border-bottom: 1px solid var(--border);
-    }
-    [data-theme="light"] header { background: rgba(248,250,252,0.9); }
-    h1 { 
-      font-family: 'Orbitron', monospace; font-size: clamp(2rem, 5vw, 3.5rem);
-      background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px var(--glow); font-weight: 800; letter-spacing: -0.02em;
-    }
-    .theme-toggle { 
-      background: var(--glass); border: 1px solid var(--border); color: var(--text);
-      padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 500;
-      backdrop-filter: blur(10px); transition: all 0.4s ease; position: relative; overflow: hidden;
-    }
-    .theme-toggle:hover { 
-      background: var(--accent); color: white; transform: translateY(-2px); box-shadow: 0 10px 30px var(--glow);
-    }
-    main { padding: 140px 5% 5rem; max-width: 1400px; margin: 0 auto; }
-    .section-title { 
-      font-size: clamp(2rem, 6vw, 3.5rem); font-family: 'Orbitron', sans-serif;
-      text-align: center; margin: 5rem 0 3rem; opacity: 0; transform: translateY(40px);
-    }
-    .cards-container { 
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; 
-    }
-    .glass-card { 
-      background: var(--glass); border: 1px solid var(--border); border-radius: 24px;
-      padding: 2.5rem; backdrop-filter: blur(25px); box-shadow: 0 20px 60px rgba(0,0,20,0.4);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d;
-      position: relative; overflow: hidden;
-    }
-    .glass-card::before { 
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; 
-      background: var(--accent); transform: scaleX(0); transition: transform 0.6s ease;
-    }
-    .glass-card:hover::before { transform: scaleX(1); }
-    .glass-card:hover { 
-      transform: translateY(-15px) scale(1.02); box-shadow: 0 40px 100px rgba(0,0,20,0.6), 0 0 60px var(--glow);
-    }
-    .glass-card h3 { 
-      background: var(--accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      font-size: 1.6rem; margin-bottom: 1rem; font-weight: 600;
-    }
-    .glass-card p, .glass-card li { color: var(--text-sec); line-height: 1.7; margin-bottom: 0.5rem; }
-    @media (max-width: 768px) { .cards-container { grid-template-columns: 1fr; gap: 2rem; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VigneshOS | Cloud Environment</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☁️</text></svg>">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>VIGNESH</h1>
-    <button style="margin-right:115px;opacity:1" class="theme-toggle" id="themeToggle">☀️ Light</button>
-  </header>
-  <main>
-    <h2 class="section-title">About Me</h2>
-    <div class="glass-card">
-  <p>I'm <strong style="color:#00ff9d">Vignesh</strong> from Aruppukottai, Tamil Nadu, India.</p>
-  <p>Software Developer with experience in <strong>web development</strong>, <strong>cloud services</strong>, <strong>server setups (especially TrueNAS)</strong>, <strong>photography</strong>, and <strong>multimedia</strong>.</p>
-</div>
 
-<style>
-.glow-text {
-  color: #00ff9d;
-  text-shadow:
-    0 0 5px #00ff9d,
-    0 0 10px #00ff9d,
-    0 0 20px #00ff9d,
-    0 0 40px #00ff9d;
-  animation: glowPulse 1.5s infinite alternate;
-}
-
-@keyframes glowPulse {
-  from { text-shadow: 0 0 5px #00ff9d, 0 0 10px #00ff9d, 0 0 20px #00ff9d, 0 0 40px #00ff9d; }
-  to { text-shadow: 0 0 10px #00ff9d, 0 0 20px #00ff9d, 0 0 40px #00ff9d, 0 0 60px #00ff9d; }
-}
-</style>
-
-    <h2 class="section-title">Corporate Projects</h2>
-    <div class="cards-container">
-      <div class="glass-card">
-        <h3>Snowcat Web</h3>
-        <p>Insurance application developed using <strong>Angular 16</strong> and <strong>Kendo UI</strong>.</p>
-        <p>Used Angular routes, component architecture, and modern state management.</p>
-      </div>
-      <div class="glass-card">
-        <h3>Snowcat Portfolio</h3>
-        <p>Developed from scratch with <strong>Angular 16</strong>, <strong>Kendo UI</strong>, Angular routes.</p>
-        <p>Focus on clean architecture, performance, and enterprise-grade UI.</p>
-      </div>
+    <!-- =================================================================
+    PRELOADER / BOOT SEQUENCE
+    ================================================================== -->
+    <div class="preloader">
+        <div class="preloader-text"></div>
     </div>
 
-    <h2 class="section-title">TrueNAS Homelab</h2>
-    <div class="glass-card">
-      <p><strong>TrueNAS SCALE Server</strong> with full automation:</p>
-      <ul style="margin: 1.5rem 0; padding-left: 1.5rem;">
-        <li>🎵 Music streaming (Jellyfin/Navidrome)</li>
-        <li>🎬 Movie streaming + 4K transcoding</li>
-        <li>⬇️ Torrent leeching & download manager</li>
-        <li>🤖 Telegram bot auto-downloads</li>
-        <li>⚙️ Azure Pipelines, Git, .NET C#, Databases</li>
-        <li>🌐 Multiple custom web apps deployed</li>
-      </ul>
-      
-<div id="status-card" style="background:#1a1a2e; border-radius:12px; padding:1.5rem; font-family:monospace; color:#00ff9d; opacity:0.85;">
-  <div id="cpu-ram">CPU: 28%  |  RAM: 41%  |  Pool Health: ONLINE</div>
-  <div>Apps Running: 7  |  Next Backup: 2h 14m</div>
-</div>
+    <!-- =================================================================
+    BACKGROUND & VISUAL EFFECTS
+    ================================================================== -->
+    <div class="cursor-glow"></div>
+    <div id="three-bg"></div>
+    <div class="vignette"></div>
 
-<script>
-  const cpuRamDiv = document.getElementById("cpu-ram");
+    <!-- =================================================================
+    HEADER
+    ================================================================== -->
+    <header>
+        <div class="logo">VigneshOS</div>
+        <nav>
+            <a href="#ecosystem" class="nav-link">Ecosystem</a>
+            <a href="#dreamcloud" class="nav-link">DreamCloud</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#timeline" class="nav-link">Project Timeline</a>
+        </nav>
+        <a href="#contact" class="cta-button" id="contact-btn"><span>Contact</span></a>
+    </header>
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+    <!-- =================================================================
+    MAIN CONTENT
+    ================================================================== -->
+    <main>
 
-  function updateStats() {
-    const cpu = getRandomInt(20, 90); // random CPU usage between 20-90%
-    const ram = getRandomInt(30, 80); // random RAM usage between 30-80%
-    cpuRamDiv.textContent = `CPU: ${cpu}%  |  RAM: ${ram}%  |  Pool Health: ONLINE`;
-  }
+        <!-- =================================================================
+        HERO SECTION
+        ================================================================== -->
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">VIGNESH</h1>
+                <p class="hero-subtitle">
+                    <span class="subtitle-line">Creative Technologist</span>
+                    <span class="subtitle-line">Cloud Engineer</span>
+                    <span class="subtitle-line">Angular Developer</span>
+                    <span class="subtitle-line">Homelab Enthusiast</span>
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#ecosystem" class="cta-button primary"><span>Explore My World</span></a>
+                    <a href="#dreamcloud" class="cta-button"><span>View DreamCloud</span></a>
+                </div>
+            </div>
+        </section>
 
-  setInterval(updateStats, 1000); // update every 1 second
-</script>
+        <!-- =================================================================
+        BOOT SEQUENCE / INTRO
+        ================================================================== -->
+        <section class="boot-sequence" id="boot">
+            <div class="boot-container">
+                <p class="boot-text">BOOTING VigneshOS...</p>
+                <p class="boot-text">Loading Profile...</p>
+                <p class="boot-text">Identity Verified: VIGNESH</p>
+                <p class="boot-text">Initializing Cloud Services...</p>
+                <p class="boot-text">Loading Experience Modules...</p>
+                <p class="boot-text">Connection Established.</p>
+            </div>
+        </section>
 
-    </div>
+        <!-- =================================================================
+        DIGITAL ECOSYSTEM
+        ================================================================== -->
+        <section id="ecosystem" class="ecosystem-section">
+            <div class="section-header">
+                <h2 class="section-title">Digital Ecosystem</h2>
+                <p class="section-subtitle">An integrated cloud platform for automation, media management, storage, and delivery. This is how my projects connect to form a single, powerful system.</p>
+            </div>
+            <div class="ecosystem-diagram">
+                <div class="node" id="node-internet">🌐 INTERNET</div>
+                <div class="node" id="node-cloudflare">Cloudflare Tunnel</div>
+                <div class="node" id="node-dreamcloud">DreamCloud</div>
+                <div class="node" id="node-telegram">Telegram Bot</div>
+                <div class="node" id="node-web">Web Dashboard</div>
+                <div class="node" id="node-queue">Queue Manager</div>
+                <div class="node" id="node-auth">Authentication</div>
+                <div class="node" id="node-torrent">Torrent Engine</div>
+                <div class="node" id="node-ytdlp">YT-DLP Engine</div>
+                <div class="node" id="node-downloads">Downloads</div>
+                <div class="node" id="node-extraction">Extraction Engine</div>
+                <div class="node" id="node-organizer">Media Organizer</div>
+                <div class="node" id="node-gdrive">Google Drive</div>
+                <div class="node" id="node-truenas">TrueNAS</div>
+                <div class="node" id="node-media-server">Jellyfin / Navidrome</div>
+                <div class="node" id="node-streaming">Stream Anywhere</div>
+                <svg class="connections">
+                    <!-- Paths will be drawn by JS -->
+                </svg>
+            </div>
+        </section>
 
-    <h2 class="section-title">Tech Stack</h2>
-    <div class="cards-container">
-      <div class="glass-card"><h3>Frontend</h3><p>Angular 16 • Kendo UI • TypeScript • RxJS</p></div>
-      <div class="glass-card"><h3>Backend</h3><p>.NET C# • Azure DevOps • SQL Databases</p></div>
-      <div class="glass-card"><h3>DevOps</h3><p>TrueNAS SCALE • Docker • Git • Azure Pipelines/Boards</p></div>
-      <div class="glass-card"><h3>Creative</h3><p>Photography • Adobe Suite • Video Editing </p></div>
-      <div class="glass-card"><h3>Live Projects</h3><p><a style="color:#00ff9d" href="https://vmoviezs.blogspot.com/" target="_blank">VMovies</a> • VMusix • DreamCloud</p></div>
-<div class="glass-card"><h3>Connect</h3><p>Email: <a style="color:#00ff9d"  href="mailto:Pcvikki@gmail.com">pcvikki@gmail.com</a></p></div>
 
-            
-            
-    
-    </div>
-  </main>
+       <!-- DREAMCLOUD -->
+        <section class="dreamcloud-section" id="dreamcloud">
+            <div class="section-header">
+                <h2 class="section-title">DreamCloud</h2>
+                <p class="section-subtitle">Your personal cloud, fully automated.</p>
+            </div>
 
-  <script>
-    // 1. Theme Toggle (Working!)
-    const toggle = document.getElementById('themeToggle');
-    const html = document.documentElement;
-    toggle.addEventListener('click', () => {
-      const isLight = html.dataset.theme === 'light';
-      html.dataset.theme = isLight ? 'dark' : 'light';
-      toggle.textContent = isLight ? '☀️ Light' : '🌙 Dark';
-    });
+            <div class="dashboard" id="dreamcloud-dashboard">
+                <div class="dash-panel storage-panel">
+                    <h3 class="panel-title">Storage</h3>
+                    <div class="storage-ring-container">
+                        <svg class="storage-ring" viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"></circle><circle class="ring-fg" id="storage-ring-fg" cx="60" cy="60" r="54"></circle></svg>
+                        <div class="storage-text"><span id="storage-percent">72%</span><span>Used</span></div>
+                    </div>
+                    <div class="storage-details" id="storage-details">13.1 TB of 18.2 TB</div>
+                </div>
+                <div class="dash-panel stat-panel"><h3 class="panel-title">CPU</h3><div class="stat-value" id="cpu-val">37%</div></div>
+                
+                <div class="dash-panel stat-panel">
+                    <h3 class="panel-title">RAM</h3>
+                    <div class="stat-value" id="ram-val">54%</div>
+                    <div class="live-progress-bar"><div id="ram-progress" class="progress-fill"></div></div>
+                </div>
+                
+                <div class="dash-panel stat-panel">
+                    <h3 class="panel-title">Upload</h3>
+                    <div class="stat-value" id="upload-val">28.4 MB/s</div>
+                    <div class="live-progress-bar"><div id="upload-progress" class="progress-fill"></div></div>
+                </div>
+                
+                <div class="dash-panel stat-panel"><h3 class="panel-title">Download</h3><div class="stat-value" id="download-val">112 MB/s</div></div>
+                <div class="dash-panel stat-panel"><h3 class="panel-title">Queue</h3><div class="stat-value" id="queue-val">12</div></div>
+                <div class="dash-panel stat-panel"><h3 class="panel-title">Completed Today</h3><div class="stat-value" id="completed-val">487</div></div>
+                <div class="dash-panel stat-panel"><h3 class="panel-title">Docker</h3><div class="stat-value" id="docker-val">17 Running</div></div>
+                
+                <div class="dash-panel stat-panel">
+                    <h3 class="panel-title">Network</h3>
+                    <div class="stat-value" id="network-val">1.2 Gbps</div>
+                    <div class="live-progress-bar"><div id="network-progress" class="progress-fill"></div></div>
+                </div>
+            </div>
 
-    // 2. GSAP ScrollTrigger Animations
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from("h1", { y: -100, opacity: 0, duration: 1.5, ease: "power3.out" });
-    gsap.from(".theme-toggle", { x: 100, opacity: 0, duration: 1.2, delay: 0.5 });
+            <div class="terminal" id="live-activity">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span></span><span></span><span></span></div>
+                    <span>Live Activity Feed</span>
+                </div>
+                <div class="terminal-body"></div>
+            </div>
+        </section>
+        <!-- =================================================================
+        CORPORATE EXPERIENCE
+        ================================================================== -->
+        <section id="experience" class="experience-section">
+            <div class="section-header">
+                <h2 class="section-title">Enterprise Experience</h2>
+                <p class="section-subtitle">Building scalable, high-performance applications for large-scale corporate environments.</p>
+            </div>
+            <div class="case-studies">
+                <div class="case-study">
+                    <div class="case-study-header">
+                        <h3>Snowcat Web <span class="company">@ Infosys</span></h3>
+                        <p>Enterprise Full Stack Developer</p>
+                    </div>
+                    <div class="case-study-body">
+                        <p>Developed and maintained modules for a large-scale enterprise insurance platform, focusing on UI performance, component reusability, and backend integration.</p>
+                        <h4>Key Responsibilities:</h4>
+                        <ul>
+                            <li>Developed enterprise Angular modules & reusable components with Kendo UI.</li>
+                            <li>Integrated .NET Core backend APIs and optimized SQL Server stored procedures.</li>
+                            <li>Managed CI/CD workflows using Azure Pipelines for production deployments.</li>
+                            <li>Participated in Agile Scrum ceremonies, including sprint planning and code reviews.</li>
+                        </ul>
+                        <h4>Achievements:</h4>
+                        <p>Significantly reduced UI rendering time and improved application maintainability by building a library of reusable enterprise components.</p>
+                    </div>
+                    <div class="case-study-stack">
+                        <span>Angular</span><span>.NET Core</span><span>C#</span><span>SQL Server</span><span>Azure DevOps</span><span>Git</span>
+                    </div>
+                </div>
+                <div class="case-study">
+                    <div class="case-study-header">
+                        <h3>Snowcat Portfolio <span class="company">@ Infosys</span></h3>
+                        <p>Lead Frontend Architect</p>
+                    </div>
+                    <div class="case-study-body">
+                        <p>Led the greenfield development of a large enterprise portfolio management application, designing the entire frontend architecture from scratch.</p>
+                        <h4>Key Responsibilities:</h4>
+                        <ul>
+                            <li>Designed the core application architecture, including routing, lazy loading, and state management.</li>
+                            <li>Implemented secure authentication and complex data visualizations with the Kendo Grid.</li>
+                            <li>Focused heavily on performance optimization and building reusable component libraries.</li>
+                            <li>Owned the production deployment and testing lifecycle within Azure DevOps.</li>
+                        </ul>
+                        <h4>Achievements:</h4>
+                        <p>Successfully designed and deployed a mission-critical application, setting new standards for performance and user experience within the division.</p>
+                    </div>
+                    <div class="case-study-stack">
+                        <span>Angular</span><span>TypeScript</span><span>RxJS</span><span>Kendo UI</span><span>Azure</span><span>REST APIs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    gsap.utils.toArray(".glass-card, .section-title").forEach((el, i) => {
-      gsap.fromTo(el, 
-        { opacity: 0, y: 80, rotationX: -20 }, 
-        { opacity: 1, y: 0, rotationX: 0, duration: 1.2, 
-          scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 20%", toggleActions: "play none none reverse" }
-        }
-      );
-    });
+        <!-- =================================================================
+        TECH STACK GALAXY
+        ================================================================== -->
+        <section id="stack" class="stack-section">
+            <div class="section-header">
+                <h2 class="section-title">Technology Galaxy</h2>
+                <p class="section-subtitle">An interactive exploration of the tools and technologies that power my projects. Hover over a planet to learn more.</p>
+            </div>
+            <div class="tech-galaxy">
+                <div class="orbit" style="--orbit-radius: 450px; --orbit-duration: 60s;">
+                    <div class="planet-container"><div class="planet frontend"><span>Frontend</span></div></div>
+                </div>
+                <div class="orbit" style="--orbit-radius: 350px; --orbit-duration: 45s;">
+                    <div class="planet-container"><div class="planet backend"><span>Backend</span></div></div>
+                </div>
+                <div class="orbit" style="--orbit-radius: 250px; --orbit-duration: 30s;">
+                    <div class="planet-container"><div class="planet infrastructure"><span>Infra</span></div></div>
+                </div>
+                <div class="sun">
+                    <span>Core</span>
+                </div>
+                <div class="tech-details">
+                    <h3>Hover over a celestial body</h3>
+                    <p>Discover the technologies within each domain.</p>
+                </div>
+            </div>
+        </section>
 
-    // 3. 3D Tilt Effect on ALL Cards
-    VanillaTilt.init(document.querySelectorAll(".glass-card"), {
-      max: 15, speed: 500, glare: true, "max-glare": 0.4,
-      scale: 1.03, perspective: 1200, axis: null
-    });
-  </script>
+        <!-- =================================================================
+        PROJECT TIMELINE
+        ================================================================== -->
+        <section id="timeline" class="timeline-section">
+            <div class="section-header">
+                <h2 class="section-title">Project Timeline</h2>
+                <p class="section-subtitle">A journey through key milestones and projects.</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3>2022: Joined Infosys</h3><p>Began career as a Technology Analyst, working on enterprise-grade applications.</p></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3>Snowcat Web</h3><p>Developed key features for a major insurance platform using Angular and .NET.</p></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3>Snowcat Portfolio</h3><p>Architected a new enterprise application from the ground up, focusing on performance.</p></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3>TrueNAS Homelab</h3><p>Built a personal cloud server, laying the foundation for future automation projects.</p></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content"><h3>DreamCloud Genesis</h3><p>Started development on a unified platform to automate media and cloud services.</p></div>
+                </div>
+                 <div class="timeline-item">
+                    <div class="timeline-content"><h3>Continuous Development</h3><p>Actively enhancing the ecosystem with new features, optimizations, and technologies.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+        CONTACT TERMINAL
+        ================================================================== -->
+        <section id="contact" class="contact-section">
+            <div class="section-header">
+                <h2 class="section-title">Establish Connection</h2>
+                <p class="section-subtitle">Let's connect. You can find me on the following platforms or reach out directly via email.</p>
+            </div>
+            <div class="contact-grid">
+                <a href="https://www.linkedin.com/in/vignesh-c-a43528232" target="_blank" class="contact-card">
+                    <h4>LinkedIn</h4><p>Professional Profile</p>
+                </a>
+                <a href="https://github.com/vmovies404/" target="_blank" class="contact-card">
+                    <h4>GitHub</h4><p>Code & Projects</p>
+                </a>
+                <a href="https://dreamcloud.vikkinas.online/" target="_blank" class="contact-card">
+                    <h4>DreamCloud</h4><p>Live Project</p>
+                </a>
+                <a href="mailto:pcvikki@gmail.com" class="contact-card">
+                    <h4>Email</h4><p>pcvikki@gmail.com</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================================
+    SVG DEFS
+    ================================================================== -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:var(--color-accent-secondary); stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--color-accent-primary); stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- =================================================================
+    JAVASCRIPT LIBRARIES
+    ================================================================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
